@@ -20,6 +20,7 @@ public class Main {
     }
 
     public static String pluralize(String word, int number) {
+        //if (number == 1) { return word; } else { return word += "s"; }
         if (number == 0 || number >= 2) {
             return word += "s";
         } else {
