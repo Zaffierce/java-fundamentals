@@ -15,3 +15,4 @@ Library.java contains the following methods
 * containsDuplicates - This method checks an array for duplicate values and returns true or false
 * averageOfArray - This method will take an array and find the average between the values in the array.
 * averageOfArrayOfArrays - This method will take the average of each array then return the array that is the lowest average.
+* tally - This method takes in a List String object that contains multiple instances of those strings, then counts each string and adds to a tally.  This will return the highest word that reoccured within your list. 
