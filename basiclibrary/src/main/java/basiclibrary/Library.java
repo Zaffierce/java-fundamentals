@@ -100,12 +100,37 @@ public class Library {
 //        //
 //
 //    }
-    int[][] weeklyMonthTemperatures = {
-            {66, 64, 58, 65, 71, 57, 60},
-            {57, 65, 65, 70, 72, 65, 51},
-            {55, 54, 60, 53, 59, 57, 61},
-            {65, 56, 55, 52, 55, 62, 57}
-    };
+
+    public static String hashyMappy(int[][] weeklyMonthTemperatures) {
+        int high = 0;
+        //int high = Integer.MIN_VALUE; // Smallest value possible in Java
+        int low = 200;
+        //int low = Integer.MAX_VALUE; // Largest value possible in Java
+
+
+        HashSet<Integer> monthTemps = new HashSet<>();
+        for (int i = 0; i < weeklyMonthTemperatures.length; i++){
+            for (int j = 0; j < weeklyMonthTemperatures[i].length; j++){
+                monthTemps.add(weeklyMonthTemperatures[i][j]);
+                if (weeklyMonthTemperatures[i][j]>high){
+                    high=weeklyMonthTemperatures[i][j];
+                }
+                if (weeklyMonthTemperatures[i][j]<low){
+                    low=weeklyMonthTemperatures[i][j];
+                }
+            }
+        }
+        //%d means insert a number at that spot
+        //%s means insert a String at that spot
+        StringBuilder tempNotSeen= new StringBuilder(String.format("High: %d\nLow: %d", high, low));
+        for(int i = low; i<high; i++){
+            if (!monthTemps.contains(i)){
+                tempNotSeen.append(String.format("\nNever saw temperature: %d", i));
+            }
+        }
+        return tempNotSeen.toString();
+    }
+
 
     // Create a method that iterates through the array to find the max and min value
     // This method also keeps track of all unique values seen
