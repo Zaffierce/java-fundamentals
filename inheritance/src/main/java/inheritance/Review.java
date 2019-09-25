@@ -9,8 +9,12 @@ public class Review{
     String restaurantReview;
     String author;
     int restaurantRating;
+    Restaurant restaurant;
 
     public Review(String author, String restaurantReview, int restaurantRating) {
+        if (restaurantRating > 5) {
+            throw new IllegalArgumentException("Rating must be less than or equal to 5!!!!!!!!!!!!!!!!!!!!");
+        }
         this.author = author;
         this.restaurantReview = restaurantReview;
         this.restaurantRating = restaurantRating;

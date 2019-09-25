@@ -2,7 +2,7 @@ package inheritance;
 
 import java.util.LinkedList;
 
-public class Restaurant {
+public class Restaurant implements Reviewed {
 
     //Each restaurant should have..
     //name
@@ -13,44 +13,25 @@ public class Restaurant {
     int restaurantRating;
     int restaurantPrice;
 
-    Node head;
+    LinkedList<Review> reviews;
 
-    class Node {
-        Review data;
-        Node next;
-        //Constructor with only one argument
-        Node(Review d){
-            this.data = d;
-            next = null;
-        }
-        //Constructor with two arguments
-        Node(Review data, Node next) {
-            this.data = data;
-            this.next = next;
-        }
+    public Restaurant() {
+        this.reviews = new LinkedList<>();
     }
 
     //This adds a new node to the beginning.
-    public void addReview(Review data) {
-        this.head = new Node(data, this.head);
+    public void addReview(Review review) {
+        this.reviews.add(review);
+        review.restaurant = this;
     }
 
     public void getRestaurantRating() {
         int stars = 0;
-        int count = 0;
 
-        if (head == null) {
-            System.out.println("No reviews exist for this restaurant.");
-        } else {
-            Node current = this.head;
-
-            while (current != null) {
-                stars += current.data.restaurantRating;
-                count++;
-                current = current.next;
-            }
-            this.restaurantRating = stars/count;
+        for (Review r : this.reviews) {
+            stars += r.restaurantRating;
         }
+        this.restaurantRating = stars / this.reviews.size();
     }
 
     public void addReviewedHead(String name, String body, int stars) {
@@ -62,10 +43,29 @@ public class Restaurant {
         this.restaurantName = restaurantName;
         this.restaurantRating = restaurantRating;
         this.restaurantPrice = restaurantPrice;
+        this.reviews = new LinkedList<>();
     }
 
     public String toString() {
         return String.format("This restaurant's name is %s, they have a rating of %d and a price rating of %d", this.restaurantName, this.restaurantRating, this.restaurantPrice);
     }
 
+    public String reviewToString() {
+        return String.format("%s recently reviewed this place and had this to say: '%s'.  They rated the place as '%d' out of 5 for the price.", this.getName(), this.getReview(), this.getRating());
+    }
+
+    @Override
+    public String getName() {
+        return "Bill Gates";
+    }
+
+    @Override
+    public String getReview() {
+        return "I had better food in a 3rd world country.";
+    }
+
+    @Override
+    public int getRating() {
+        return 1;
+    }
 }
