@@ -35,4 +35,16 @@ public class ReviewTest {
 //    public void Review_Insert(){
 //        //Todo
 //    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testReviewConstructor() {
+        new Review("Michelle", "This should break", 6);
+    }
+
+    @Test
+    public void testReviewAdding() {
+        Restaurant woodblock = new Restaurant("Woodblock", 5, 4);
+        Review reviewOfWoodblock = new Review("Sarah", "It's good", 5);
+        woodblock.addReview(reviewOfWoodblock);
+    }
 }
